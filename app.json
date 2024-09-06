@@ -6,6 +6,8 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
+    "main": "index.js",
+  "type":"module",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
