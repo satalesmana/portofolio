@@ -2,35 +2,73 @@ import {
   Text, 
   View, 
   StyleSheet,
-  Image
+  Image,
+  FlatList,
+  ScrollView
 } from "react-native";
 import { Link } from 'expo-router';
 import { CustomeCard } from '@/components'
 
 export default function Index() {
-  return (
-    <View>
-      <View style={style.container}>
-        <Image 
-          style={style.tinyLogo} 
-          source={{
-            uri: 'https://reactnative.dev/img/tiny_logo.png',
-          }}/>
-        <Text style={style.textName}>
-          Rebecca Max
-        </Text>
-        <Text style={[style.subText, style.textWhite]}>
-          jhondoe@mail.com
-        </Text>
-        <Link href="/experience">Experience</Link>
-      </View>
-      <View style={style.border}>
-          <CustomeCard nama="Natan"/>
-          <CustomeCard nama="Anto" />
-          <CustomeCard nama="Surya"/>
-      </View>
+  const data = [
+    {
+      id:'1', 
+      label:'Personal Details', 
+      description:'this is my personal information', 
+      path:'/personal'
+    },
+    {
+      id:'2', 
+      label:'Experience', 
+      path:'/experience',
+      description:'All about my experince', 
+    },
+    {
+      id:'3', 
+      label:'Education', 
+      path:'/education',
+      description:'education background is here',
+    },
+    {
+      id:'4', 
+      label:'Certificate', 
+      path:'/certificate',
+      description:'license and certificate is here',
+    },
+  ];
 
-    </View>
+  return (
+    <ScrollView>
+      <View>
+        <View style={style.container}>
+          <Image 
+            style={style.tinyLogo} 
+            source={{
+              uri: 'https://reactnative.dev/img/tiny_logo.png',
+            }}/>
+          <Text style={style.textName}>
+            Rebecca Max
+          </Text>
+          <Text style={[style.subText, style.textWhite]}>
+            jhondoe@mail.com
+          </Text>
+          <Link href="/experience">Experience</Link>
+        </View>
+        <View style={style.border}>
+            <FlatList 
+              data={data}
+              renderItem={
+                ({item}) => <CustomeCard 
+                              nama={ item.label } 
+                              description={item.description}
+                              path={item.path}
+                            /> 
+              } 
+              keyExtractor={item => item.id}
+            />
+        </View>
+      </View>
+    </ScrollView>
   );
 }
 
