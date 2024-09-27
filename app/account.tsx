@@ -35,6 +35,13 @@ export default function Index() {
       path:'/certificate',
       description:'license and certificate is here',
     },
+    {
+      id:'5', 
+      label:'Admin Panel', 
+      path:'/(tabs)',
+      description:'go to main page',
+    },
+    
   ];
 
   return (
