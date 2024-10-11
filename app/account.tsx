@@ -6,10 +6,13 @@ import {
   FlatList,
   ScrollView
 } from "react-native";
-import { Link } from 'expo-router';
 import { CustomeCard } from '@/components'
+import { useSelector } from 'react-redux'
+
 
 export default function Index() {
+  const account = useSelector((state) => state.account)
+
   const data = [
     {
       id:'1', 
@@ -38,11 +41,12 @@ export default function Index() {
     {
       id:'5', 
       label:'Admin Panel', 
-      path:'/(tabs)',
+      path:'/(tabs)/home',
       description:'go to main page',
     },
     
   ];
+
 
   return (
     <ScrollView>
@@ -54,12 +58,11 @@ export default function Index() {
               uri: 'https://reactnative.dev/img/tiny_logo.png',
             }}/>
           <Text style={style.textName}>
-            Rebecca Max
+            {account.name}
           </Text>
           <Text style={[style.subText, style.textWhite]}>
-            jhondoe@mail.com
+            {account.email} 
           </Text>
-          <Link href="/experience">Experience</Link>
         </View>
         <View style={style.border}>
             <FlatList 

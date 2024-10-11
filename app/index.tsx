@@ -1,12 +1,14 @@
 
 import { View, Text } from "react-native"
+import { router } from 'expo-router';
+
 import {
     MyButton
 } from '../components'
 
 export default function Index() {
     const goToHomePage = ()=>{
-        alert('tes')
+        router.push('/account')
     }
     
     return (
