@@ -10,8 +10,8 @@ export const accountSlice = createSlice({
     },
     reducers: {
         setData:(state, action)=>{
-            state = { ...state, ...action.payload }
-            console.log('state', state)
+            state.name = action.payload.name
+            state.email = action.payload.email
         },
         resetData:(state)=>{
             state = {

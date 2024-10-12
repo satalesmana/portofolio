@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Image,
   FlatList,
-  ScrollView
 } from "react-native";
 import { CustomeCard } from '@/components'
 import { useSelector } from 'react-redux'
@@ -49,7 +48,6 @@ export default function Index() {
 
 
   return (
-    <ScrollView>
       <View>
         <View style={style.container}>
           <Image 
@@ -78,7 +76,6 @@ export default function Index() {
             />
         </View>
       </View>
-    </ScrollView>
   );
 }
 

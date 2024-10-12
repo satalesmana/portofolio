@@ -8,14 +8,14 @@ import React from 'react';
 import {
   MyButton
 } from '../../components'
-import {  useDispatch } from 'react-redux'
-import { setData, resetData } from '../../store/reducer/accountReducer'
-
+import {  useDispatch, useSelector } from 'react-redux'
+import { setData } from '../../store/reducer/accountReducer'
 
 
 export default function Tab() {
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
+const account = useSelector((state) => state.account)
+  const [name, setName] = React.useState(account.name);
+  const [email, setEmail] = React.useState(account.email);
   const dispatch = useDispatch();
 
   const onSaveData=()=>{
