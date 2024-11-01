@@ -81,7 +81,7 @@ export default function Index() {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor:"#0E627C",
+    backgroundColor:"#3b5998",
     height:250,
     borderBottomEndRadius:32,
     borderBottomStartRadius: 32,

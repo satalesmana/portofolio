@@ -1,25 +1,27 @@
 
-import { View, Text } from "react-native"
+import { Text } from "react-native"
 import { router } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useEffect } from "react";
 
-import {
-    MyButton
-} from '../components'
+
 
 export default function Index() {
-    const goToHomePage = ()=>{
-        router.push('/account')
+    const splashTimer = ()=>{
+        setTimeout(()=>{
+            router.push('/account')
+        }, 3000)
     }
     
+    useEffect(()=>{
+        splashTimer()
+    },[])
     return (
-        <View style={{marginTop:50, alignItems:'center', padding: 15}}>
-            <Text>
-                ini halaman index app
-            </Text>
-
-            <MyButton 
-                title="Go to Home"
-                onPress={goToHomePage}/>
-        </View>
+        <LinearGradient
+            style={{justifyContent:'center', alignItems:'center', flex: 1}}
+            colors={['#4c669f', '#3b5998', '#192f6a']}>
+                <Text style={{ fontSize:50, color:'white', fontWeight:'700'}}>PortPolio</Text>
+                <Text style={{color:'white'}}>all about me</Text>
+        </LinearGradient>
     )
 }

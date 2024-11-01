@@ -1,9 +1,13 @@
-import { Text, View, StyleSheet } from 'react-native';
-import { Link } from 'expo-router';
+import { Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import { Href, router } from 'expo-router';
+
 
 export const CustomeCard=(props:any)=>{
+    const goToPage=(path:Href<string>)=>{
+        router.push(path)
+    }
     return (
-        <Link href={props.path} style={styles.container}>
+        <TouchableOpacity onPress={()=> goToPage(props.path)} style={styles.container}>
             <View style={styles.leftbox}>
                 <Text style={styles.title}>{ props.nama }</Text>
                 <Text>{ props.description }</Text>
@@ -11,7 +15,7 @@ export const CustomeCard=(props:any)=>{
             <View style={styles.rightbox}>
                 <Text style={styles.number}> 2 </Text>
             </View>
-        </Link>
+        </TouchableOpacity>
     )
 }
 const styles=StyleSheet.create({
