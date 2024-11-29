@@ -1,6 +1,8 @@
 import { View, Text, FlatList, StyleSheet } from "react-native"
 import React, { useEffect, useState } from 'react';
-import CApi from '../lib/CApi';
+import CApi from '../../lib/CApi';
+import { MyButton } from '../../components'
+import { router } from 'expo-router';
 
 interface Education{
     _id?: string,
@@ -25,24 +27,11 @@ const EducationCard=({
         <View style={style.card}>
             <Text style={style.title}>{jenjang_pendidikan}, {program_studi}</Text>
             <Text>{nama_kampus}</Text>
-            <View style={style.item}>
-                <Text style={style.item_title}>Tahun Lulus</Text>
-                <Text style={style.item_content}>: {tahun_lulus}</Text>
-            </View>
-
-            <View style={style.item}>
-                <Text style={style.item_title}>IPK</Text>
-                <Text style={style.item_content}>: {ipk}</Text>
-            </View>
-           
-            <Text style={style.item_title}>Alamat : </Text>
-            <Text style={style.item_content}>{alamat_kampus}</Text>
-            
         </View>
     )
 }
 
-export default function Educations() {
+export default function EducationsForm() {
     const [educations, setEducations] = useState([])
 
     const onFetchData=async ()=>{
@@ -54,12 +43,24 @@ export default function Educations() {
         }
     }
 
+    const onAddNew=()=>{
+        router.push('/education_form_input')
+    }
+
     useEffect(() => {
         onFetchData()
     },[]);
 
     return (
         <View>
+            <View style={{ paddingLeft: 10, paddingRight:10, marginTop:5}}>
+                <MyButton 
+                    style={{borderRadius:0}}
+                    title="Add New"
+                    onPress={onAddNew}/>
+            </View>
+            
+
             <FlatList 
                 renderItem={({item}:Education) => 
                     <EducationCard 

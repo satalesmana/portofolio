@@ -13,6 +13,8 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="account" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="education_form_input" options={{title:'Education Form'}} />
+
       </Stack>
     </Provider>
   );

@@ -15,7 +15,14 @@ export default function TabLayout() {
         name="personal_form"
         options={{
           title: 'Personal',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="cog" color={color} />,
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="user" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="education_form"
+        options={{
+          title: 'Educations',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="book" color={color} />,
         }}
       />
     </Tabs>
