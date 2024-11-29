@@ -2,6 +2,8 @@ import React from 'react';
 import { MyButton } from '../components'
 import CApi from '../lib/CApi';
 import { router } from 'expo-router';
+import { useSelector, useDispatch } from 'react-redux'
+import { setData, resetData } from '../store/reducer/educationReducer'
 import { 
     SafeAreaView, 
     View, Text, 
@@ -13,25 +15,27 @@ import {
 
 
 export default function EducationFormInput() {
-    const [ipk, setIpk] = React.useState('');
-    const [namaKampus, setNamaKampus] = React.useState('');
-    const [programStudi, setProgramStudi] = React.useState('');
-    const [jenjang, setJenjang] = React.useState('');
-    const [alamat, setAlamat] = React.useState('');
-    const [thunLulus, setTahunLulus] = React.useState('');
+    const educationForm = useSelector((state) => state.education.formInput)
+    const dispatch = useDispatch();
+
+    const onChangeValue=(payload:any)=>{
+        dispatch(setData({...educationForm,...payload}))
+    }
 
     const onSaveData=async ()=>{
         try{
-            const { data } = await CApi.post('/educations',{
-                ipk: ipk,
-                nama_kampus: namaKampus,
-                program_studi: programStudi,
-                jenjang_pendidikan: jenjang,
-                alamat_kampus: alamat,
-                tahun_lulus: thunLulus
-            })
+          
+            if(educationForm._id == ''){
+                const { data } = await CApi.post('/educations',educationForm)
+                ToastAndroid.show(data.message, ToastAndroid.SHORT);
+            }
 
-            ToastAndroid.show('Data berhasil disimpan', ToastAndroid.SHORT);
+            if(educationForm._id != ''){
+                const { data } = await CApi.put(`/educations/${educationForm._id}`,educationForm)
+                ToastAndroid.show(data.message, ToastAndroid.SHORT);
+            }
+
+            dispatch(resetData())
             router.push('/(tabs)/education_form')
         }catch(error){
             const msg = error?.message ? error?.message :''
@@ -47,48 +51,48 @@ export default function EducationFormInput() {
                         <Text>Nama Kampus</Text>
                         <TextInput 
                             style={styles.input}
-                            onChangeText={setNamaKampus}
-                            value={namaKampus}
+                            onChangeText={(val)=>onChangeValue({nama_kampus:val})}
+                            value={educationForm.nama_kampus}
                             />
                     </View>
                     <View>
                         <Text>Program Studi</Text>
                         <TextInput 
                             style={styles.input}
-                            onChangeText={setProgramStudi}
-                            value={programStudi}
+                            onChangeText={(val)=>onChangeValue({program_studi:val})}
+                            value={educationForm.program_studi}
                             />
                     </View>
                     <View>
                         <Text>Jenjang Pendidikan</Text>
                         <TextInput 
                             style={styles.input}
-                            onChangeText={setJenjang}
-                            value={jenjang}
+                            onChangeText={(val)=>onChangeValue({jenjang_pendidikan:val})}
+                            value={educationForm.jenjang_pendidikan}
                             />
                     </View>
                     <View>
                         <Text>IPK</Text>
                         <TextInput 
                             style={styles.input}
-                            onChangeText={setIpk}
-                            value={ipk}
+                            onChangeText={(val)=>onChangeValue({ipk:val})}
+                            value={educationForm.ipk}
                             />
                     </View>
                     <View>
                         <Text>Tahun Lulus</Text>
                         <TextInput 
                             style={styles.input}
-                            onChangeText={setTahunLulus}
-                            value={thunLulus}
+                            onChangeText={(val)=>onChangeValue({tahun_lulus:val})}
+                            value={educationForm.tahun_lulus}
                             />
                     </View>
                     <View>
                         <Text>Alamat Kampus</Text>
                         <TextInput 
                             style={styles.input}
-                            onChangeText={setAlamat}
-                            value={alamat}
+                            onChangeText={(val)=>onChangeValue({alamat_kampus:val})}
+                            value={educationForm.alamat_kampus}
                             />
                     </View>
 
